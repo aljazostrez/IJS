@@ -1,0 +1,36 @@
+\babel@toc {slovene}{}
+\contentsline {section}{\numberline {1}Osnovni statisti\IeC {\v c}ni pojmi}{4}
+\contentsline {section}{\numberline {2}Divergenca glede na gostoto verjetnosti}{10}
+\contentsline {subsection}{\numberline {2.1}Definicija divergence}{10}
+\contentsline {subsection}{\numberline {2.2}Divergenca univariatnih porazdelitev}{11}
+\contentsline {subsection}{\numberline {2.3}Renyi divergenca}{12}
+\contentsline {subsection}{\numberline {2.4}Renyi divergenca normalnih porazdelitev}{16}
+\contentsline {subsection}{\numberline {2.5}Numeri\IeC {\v c}no ra\IeC {\v c}unanje Renyi divergence}{18}
+\contentsline {subsection}{\numberline {2.6}Divergenca bivariatnih in multivariatnih porazdelitev}{22}
+\contentsline {subsection}{\numberline {2.7}Prakti\IeC {\v c}na uporaba}{24}
+\contentsline {section}{\numberline {3}Predstavitev podatkov vzorca}{25}
+\contentsline {subsection}{\numberline {3.1}Histogram}{25}
+\contentsline {subsection}{\numberline {3.2}Grafi\IeC {\v c}ni prikaz histogramov}{28}
+\contentsline {subsection}{\numberline {3.3}Optimalno \IeC {\v s}tevilo stolpcev histograma}{29}
+\contentsline {subsubsection}{\numberline {3.3.1}Korenska izbira}{30}
+\contentsline {subsubsection}{\numberline {3.3.2}Rice}{30}
+\contentsline {subsubsection}{\numberline {3.3.3}Sturges}{30}
+\contentsline {subsubsection}{\numberline {3.3.4}Scoot}{31}
+\contentsline {subsubsection}{\numberline {3.3.5}Freedman-Diaconis}{31}
+\contentsline {subsection}{\numberline {3.4}Enakovredni stolpci}{32}
+\contentsline {subsection}{\numberline {3.5}Ocena gostote verjetnosti z jedrom}{35}
+\contentsline {subsection}{\numberline {3.6}Kullback-Leibler metoda za optimalno \IeC {\v s}tevilo stolpcev}{38}
+\contentsline {section}{\numberline {4}Renyi divergenca glede na histogram}{40}
+\contentsline {subsection}{\numberline {4.1}Formula za ra\IeC {\v c}unanje Renyi divergence glede na histogram}{40}
+\contentsline {subsection}{\numberline {4.2}Sprostitev definicijskega obmo\IeC {\v c}ja histogramov}{41}
+\contentsline {subsection}{\numberline {4.3}Prerazporeditev mej v histogramih}{43}
+\contentsline {section}{\numberline {5}Entropija}{46}
+\contentsline {subsection}{\numberline {5.1}Renyi entropija glede na gostoto verjetnosti}{46}
+\contentsline {subsection}{\numberline {5.2}Renyi entropija glede na histogram}{47}
+\contentsline {subsection}{\numberline {5.3}Zgled}{47}
+\contentsline {section}{\numberline {6}Posplo\IeC {\v s}ena divergenca}{49}
+\contentsline {subsection}{\numberline {6.1}Razred Jensenovih divergenc}{49}
+\contentsline {subsection}{\numberline {6.2}Jensen-Renyi divergenca}{49}
+\contentsline {subsection}{\numberline {6.3}Jensen-Renyi divergenca glede na histogram}{50}
+\contentsline {subsection}{\numberline {6.4}Uporaba Jensen-Renyi divergence}{51}
+\contentsline {section}{\numberline {7}Zaklju\IeC {\v c}ek}{52}

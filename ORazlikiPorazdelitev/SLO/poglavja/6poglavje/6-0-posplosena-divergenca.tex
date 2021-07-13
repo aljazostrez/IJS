@@ -1,0 +1,55 @@
+\section{Posplošena divergenca}
+
+Posplošena divergenca je orodje, ki izračuna divergenco med več porazdelitvami hkrati, ne samo med dvema. Računali bomo torej lahko divergenco ansambla porazdelitev. Vpeljimo posplošeno Jensenovo divergenco.
+
+\subsection{Razred Jensenovih divergenc}
+
+Definirajmo razred Jensenovih divergenc.
+
+\begin{definicija}
+    Naj bo $H$ poljubna entropija. Naj bodo $P_1, \ldots, P_n$ porazdelitve na istem nosilcu in \\ $w = (w_1, \ldots, w_n)$ vektor uteži, tako da $\sum_{i=1}^n w_i = 1$. \textbf{Jensenova divergenca} je definirana kot:
+    \begin{equation}
+        J^w (P_1, \ldots, P_n) = H \Big(\sum_{i=1}^n w_i P_i\Big) - \sum_{i=1}^n w_i H(P_i).
+    \end{equation}
+\end{definicija}
+
+Izpustimo dokaz, da ta razred res predstavlja razred divergenc. Vrstni red porazdelitev v Jensenovi divergenci je nepomemben, če so uteži enake ($\frac{1}{n}$). Nepomemben pa je tudi, če usklajeno permutiramo porazdelitve in uteži.
+
+\subsection{Jensen-Renyi divergenca}
+
+Ker smo v prejšnjem poglavju spoznali Renyi entropijo, si poglejmo Jensen-Renyi divergenco - torej Jensenovo divergenco, kjer za entropijo vzamemo Renyi entropijo.
+
+\begin{definicija}
+    Naj bo $H_\alpha$ Renyi entropija. Naj bodo $P_1, \ldots, P_n$ porazdelitve na istem nosilcu in \\ $w = (w_1, \ldots, w_n)$ vektor uteži, tako da $\sum_{i=1}^n w_i = 1$. Naj bo $\alpha > 0$. \textbf{Jensen-Renyi divergenca} je definirana kot:
+    \begin{equation}\label{JRDformula}
+        JR_\alpha^w (P_1, \ldots, P_n) = H_\alpha \Big(\sum_{i=1}^n w_i P_i\Big) - \sum_{i=1}^n w_i H_\alpha(P_i).
+    \end{equation}
+\end{definicija}
+
+\subsection{Jensen-Renyi divergenca glede na histogram}
+
+Zdaj, ko smo definirali Jensen-Renyi divergenco, nas zanima le-ta, ko so porazdelitve predstavljene s histogrami. Pojavi se namreč problem, saj moramo po definiciji Jensen-Renyi divergence v 1. členu formule \eqref{JRDformula} seštevati histograme med seboj.
+
+Gostoto verjetnosti porazdelitve $P_i$ lahko predstavlja histogram z $m$ stolpci. Poimenujmo ta histogram kar $P_i$. Histogram $P_i$ lahko zapišemo kot $K_i = (x_i, y_i)$, kjer so $x_i = (x_{i,1}, \ldots, x_{i, m+1})$ meje stolpcev histograma $P_i$, $y_i = (y_{i,1}, \ldots, y_{i,m})$ pa višine stolpcev histograma $P_i$, kjer je $m$ enak številu stolpcev histograma $P_i$.
+
+Da lahko izračunamo 1. člen v formuli \eqref{JRDformula}, moramo histograme pretvoriti na histograme z enakim definicijskim območjem in enakimi mejami stolpcev. To naredimo iterativno s postopki iz poglavja \ref{posplositev1d}. Ne rabimo pa spreminjati stolpcev z višino 0, saj pri računanju Renyi entropije ne pride do deljenja z 0. $\sum_{i=1}^n w_i P_i$ bo, ko jo izračunamo, ravno histogram, kjer seštejemo višine stolpcev, pomnožene z utežjo. Če zapišemo $P_i$ kot zgoraj, dobimo višine tega histograma:
+\begin{align}
+	\sum_{i=1}^n w_i P_i &= \sum_{i=1}^n w_i \cdot (x, y_i) \overset{(\ast)}{=} \\
+	&\overset{(\ast)}{=} \Big(x_i, \sum_{i=1}^n w_i \cdot y_i\Big) = P^\prime,
+\end{align}
+kjer smo pri $\overset{(\ast)}{=}$ upoštevali, da spreminjamo le višine stolpcev in ne njihovih mej. Ker imajo po ureditvi definicijskega območja in mej stolpcev vsi histogrami iste meje, smo te meje poimenovali kot $x$.
+
+V drugem členu nimamo težav, saj že znamo izračunati Renyi entropijo glede na histogram. Splošna formula za računanje Jensen-Renyi divergence glede na histogram se torej glasi:
+\begin{equation}
+    JR_\alpha^w (P_1, \ldots, P_n) = H_\alpha (P^\prime) - \sum_{i=1}^n w_i H_\alpha(P_i).
+\end{equation}
+
+\pagebreak
+
+\subsection{Uporaba Jensen-Renyi divergence}
+
+Opišimo primer uporabe Jensen-Renyi divergence. Recimo, da želimo sporočiti napako na stroju, ko se ta pojavi. Imamo histograme oz. gostote verjetnosti, ki predstavljajo optimalno delovanje stroja (predstavljajo lahko npr. temperaturo, vibracije, glasnost, \ldots).
+
+Vzamemo polurni interval, ko bomo preverjali delovanje stroja. Torej v pol ure bomo zbrali dovolj podatkov, da bomo lahko skonstruirali histograme ali gostote verjetnosti, ki bodo predstavljali trenutno delovanje stroja.
+
+Izračunajmo Jensen-Renyi divergenco ansambla histogramov, ki predstavljajo optimalno delovanje stroja - recimo, da dobimo vrednost $x$. Sedaj pa izračunajmo še Jensen-Renyi divergenco trenutnega delovanja - recimo, da dobimo vrednost $y$. Razlika $|x-y|$ lahko meri, kolikšno je odstopanje trenutnega delovanja od optimalnega. Lahko si postavimo mejo $c$, ko bomo sporočili napako. Napako bomo torej sporočili, če bo $|x-y| > c$.

@@ -1,0 +1,180 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[a4paper]{geometry}
+\usepackage[myheadings]{fullpage}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx, wrapfig, subcaption, setspace, booktabs}
+\usepackage[T1]{fontenc}
+\usepackage[font=small, labelfont=bf]{caption}
+\usepackage{fourier}
+\usepackage[protrusion=true, expansion=true]{microtype}
+\usepackage[english,slovene]{babel}
+\usepackage{sectsty}
+\usepackage{url, lipsum}
+\usepackage{amsmath}
+%Če maš slike v mapi slike v tem direktoriju
+\graphicspath{{./slike/}}
+
+%math quotation
+\newsavebox{\mathbox}\newsavebox{\mathquote}
+\makeatletter
+\newcommand{\mathquotes}[1]{% \mathquotes{<stuff>}
+  \savebox{\mathquote}{\text{``}}% Save quotes
+  \savebox{\mathbox}{$\displaystyle #1$}% Save <stuff>
+  \raisebox{\dimexpr\ht\mathbox-\ht\mathquote\relax}{``}#1\raisebox{\dimexpr\ht\mathbox-\ht\mathquote\relax}{''}
+}
+\makeatother
+
+
+% Neki za obliko (glava, noga)
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\doublespacing
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+
+%-------------------------------------------------------------------------------
+% DEFINICIJE, IZREKI, DOKAZI
+%-------------------------------------------------------------------------------
+% Da ni pike na koncu definicije (namesto Definicija 1. bo pisalo Definicija 1)
+\usepackage{amsthm}
+\usepackage{xpatch}
+\makeatletter
+\AtBeginDocument{\xpatchcmd{\@thm}{\thm@headpunct{.}}{\thm@headpunct{}}{}{}}
+\makeatother
+
+%Definicije, izreki, trditve ...
+\newtheorem{lema}{Lema}[section]
+\newtheorem*{zgled}{Zgled: }
+\newtheorem{trditev}[lema]{Trditev}
+\newtheorem{izrek}[lema]{Izrek}
+\newtheorem{definicija}{Definicija}[section]
+\theoremstyle{definition}
+\newtheorem{primer}{Primer}[section]
+\newtheorem{posledica}[lema]{Posledica}
+\newtheorem*{opomba}{Opomba:}
+
+% \newenvironment{theo}
+%    {\begin{shaded}\begin{theorem}}
+%    {\end{theorem}\end{shaded}}
+
+%-------------------------------------------------------------------------------
+% HEADER & FOOTER
+%-------------------------------------------------------------------------------
+
+% oblika (naslovnica, glava, noga)
+\pagestyle{fancy}
+\fancyhf{}
+\setlength\headheight{15pt}
+\fancyhead[L]{Aljaž Ostrež, Renyi divergenca}
+\fancyhead[R]{Ljubljana, \today}
+\fancyfoot[R]{Stran \thepage}
+
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{1pt}
+
+% Poljubno
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\RR}{\mathbb{R}}
+
+%-------------------------------------------------------------------------------
+% TITLE PAGE
+%-------------------------------------------------------------------------------
+
+\begin{document}
+
+% Oblika naslova
+\title{ \HRule{2pt} \\
+        \LARGE \textbf{\uppercase{Divergenca kot merilo za razliko med porazdelitvami}}
+        \HRule{2pt} \\ [0.5cm]
+        \normalsize \vspace*{5\baselineskip}}
+
+\author{
+        Aljaž Ostrež \\ 
+		Fakulteta za matematiko in fiziko, Ljubljana \\ 
+		Institut Jožefa Stefana, Ljubljana \\}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+\setcounter{page}{1}
+
+%-------------------------------------------------------------------------------
+% TABLE OF CONTENT
+%-------------------------------------------------------------------------------
+
+\tableofcontents
+\newpage
+
+%-------------------------------------------------------------------------------
+% BODY
+%-------------------------------------------------------------------------------
+
+\section*{Uvod}
+
+Verjetnost in statistika sta veji matematike, ki močno povezujeta teoretično matematiko in praktično uporabo matematike v znanosti.
+
+Zakaj pogostokrat v istem stavku govorimo o verjetnosti in statistiki? Statistika in verjetnost sta zelo povezana pojma, saj v statistični teoriji opišemo naključnost in negotovost s pomočjo teorije verjetnosti.
+
+%% KRATEK PREGLED
+Najprej bomo opisali osnovne pojme verjetnosti in statistike, ki jih bomo uporabili v nadaljevanju. V naslednjem poglavju bomo opisali pojem divergence (glede na gostoto verjetnosti). V nadaljevanju bomo opisali nekaj metod za predstavitev vzorca podatkov. Pogledali si bomo, kako računamo Renyi divergenco glede na histogram, nato pa opisali še pojem entropije in vpeljali posplošeno Jensenovo divergenco.
+
+Posebna zahvala gre dr. Miranu Černetu iz Fakultete za matematiko in fiziko v Ljubljani, ki mi je pomagal pri dokazu, da je Renyi divergenca res divergenca. Prav tako pa se zahvaljujem mentorjema na Inštitutu Jožefa Stefana v času študija, dr. Pavletu Boškoskemu in dr. Đaniju Juričiću.
+
+\include{poglavja/1poglavje/1-osnovni-statisticni-pojmi}
+
+\include{poglavja/2poglavje/2-0-divergenca-glede-na-gostoto-verjetnosti}
+
+\include{poglavja/3poglavje/3-0-predstavitev-podatkov-vzorca}
+
+\include{poglavja/4poglavje/4-1-renyi-div-glede-na-hist}
+
+\include{poglavja/5poglavje/5-0-entropija}
+
+\include{poglavja/6poglavje/6-0-posplosena-divergenca}
+
+
+\section{Zaključek}
+
+Spoznali smo nekaj metod, ki jih lahko uporabimo v realnih problemih odkrivanja napak delovanja. Predvsem je pomembno, da imamo na voljo dovolj podatkov, da lahko zgradimo verodostojen histogram ali gostoto verjetnosti. Če imamo premalo podatkov, je lahko prirejen histogram daleč od realnega. Seveda pa je zbiranje zadostnega števila podatkov finančno pogojeno.
+
+Ugotoviti moramo tudi, kakšne časovne intervale bomo izbrali za preverjanje delovanja. Če izberemo le eno dolžino intervala, se lahko napaka razporedi na dva intervala in je ne bomo zaznali. To lahko rešimo tako, da vzporedno preverjamo pravilnost z istim intervalom, ki pa bo v vzporedni liniji za polovico zamaknjen.
+
+Jasno pa je, da obstaja neka praktična zgornja meja za število podatkov, ki jih lahko zajamemo. To pomeni, da bo cena senzorja za merjenje naraščala eksponentno v odvisnosti od frekvence zajema podatkov. Narediti moramo torej kompromis med ceno, ki smo jo pripravljeni plačati, in kvaliteto merjenja napake.
+
+\newpage
+
+%---------------------------------------------------
+% VIRI
+%---------------------------------------------------
+\bibliographystyle{plain}
+% \bibliography{sample.bib}
+
+\begin{thebibliography}{9}
+	
+\bibitem{knjiga}
+Dekking, F. M., Kraaikamp, C., Lopuha{\"a}, H. P. in Meester, L. E., 2005. A Modern Introduction to Probability and Statistic: Understanding Why and How. 2. izdaja. London: Springer-Verlag London Limited.
+
+\bibitem{eguchi}
+Eguchi, S., 1985. A differential geometric approach to statistical inference on the basis of contrast functional. Dostopno na: \url{https://projecteuclid.org/download/pdf_1/euclid.hmj/1206130775} [9. 3. 2019]
+
+\bibitem{fdv}
+Ferligoj, Anu\v{s}ka, idr. 2015, Osnove statistike na prosojnicah: \v{s}tudijsko gradivo pri predmetu Statistika, Ljubljana: Fakulteta za dru\v{z}bene vede.
+
+\bibitem{Gil}
+Gil, M., 2011. On Rényi Divergence Measures for Continuous Alphabet Sources. Dostopno na: 
+\url{https://pdfs.semanticscholar.org/8ebc/dd48e51d9f18a0025794ae088ce754dd47ce.pdf} [9. 3. 2019]
+
+\bibitem{bf}
+Košmelj, K., 2007. Uporabna statistika. 2. izdaja. Ljubljana: Biotehniška fakulteta.
+
+\bibitem{sason}
+Sason, I. in Verd\'u, S., 2018. f-Divergence Inequalities. Dostopno na: \url{http://webee.technion.ac.il/people/sason/f-divergence%20inequalities.pdf} [9. 3. 2019]
+
+\bibitem{vanErven} 
+van Erven, T. in Harremoës, P., 2007. Renyi Divergence and Kullback-Leibler Divergence. Dostopno na: 
+\url{https://arxiv.org/pdf/1206.2459.pdf} [9. 3. 2019]
+
+\end{thebibliography}
+
+\end{document}

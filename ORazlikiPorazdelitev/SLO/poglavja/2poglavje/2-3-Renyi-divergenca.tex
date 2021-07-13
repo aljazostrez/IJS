@@ -1,0 +1,130 @@
+\subsection{Renyi divergenca}
+
+Nekoliko podrobneje oglejmo \textbf{Renyi divergenco}. Omejili se bomo le na zvezne spremenljivke, saj je definicija za diskretne analogna.
+
+
+\begin{definicija}
+	Naj bosta $P$ in $Q$ porazdelitvi z definicijskim območjem $\Omega$, $p$ in $q$ po vrsti gostoti verjetnosti porazdelitev $P$ in $Q$ ter $\alpha > 0$, $\alpha \neq 1$. Tedaj je \textbf{Renyi divergenca} definirana kot:
+	\begin{equation}
+		D_{\alpha}(P \| Q)=\frac{1}{\alpha-1} \cdot \log \int_{\Omega} \Big(p(x)\Big)^{\alpha}\Big(q(x)\Big)^{1-\alpha}\  dx.
+	\end{equation}
+\end{definicija}
+
+Dokazati moramo naslednji izrek:
+
+\begin{izrek}
+	Renyi divergenca je divergenca.
+\end{izrek}
+
+\begin{proof}
+	Naj bo $S$ prostor gostot verjetnosti.
+	Dokazati moramo:
+	\begin{enumerate}
+		\item $D(p \| q) \geq 0$ za vsaka $p, q \in S$,
+		\item $D(p \| q) = 0 \Leftrightarrow p = q$.
+	\end{enumerate}
+	Najprej dokažimo, da je Renyi divergenca vedno pozitivna. Namesto $p(x)$ in $q(x)$ pišimo kar $p$ in $q$. Dokazati moramo:
+	\begin{equation}
+		\label{neenakost}
+		\frac{1}{\alpha - 1}\log \int_\Omega p^\alpha q^{1-\alpha} \  dx \geq 0.
+	\end{equation}
+	Ločimo primere:
+	\begin{itemize}
+		\item $\alpha > 1$: ker je prvi faktor v neenakosti \ref{neenakost} pozitiven za $\alpha > 1$, je ekvivalentno dokazati, da
+		\begin{equation*}
+			\log \int_\Omega p^\alpha q^{1-\alpha}  dx \geq 0
+		\end{equation*}
+		oziroma
+		\begin{equation*}
+			\int_\Omega p^\alpha q^{1-\alpha}  dx \geq 1
+		\end{equation*}
+		oziroma
+		\begin{equation*}
+			\int_\Omega \Big(\frac{p}{q}\Big)^\alpha q \  dx \geq 1.
+		\end{equation*}
+		Uporabimo Jensenovo neenakost za konveksno funkcijo $\phi$:
+		\begin{equation*}
+			\phi(\int f(x) dx) \leq \int (\phi \circ f) (x) dx,
+		\end{equation*}
+		kjer izberemo funkcijo $\phi(t) = t^\alpha$:
+		\begin{equation*}
+			\int_\Omega \Big(\frac{p}{q}\Big)^\alpha q \  dx \geq \Big(\int_\Omega \frac{p}{q} q dx\Big)^\alpha = \Big(\int p dx\Big)^\alpha = 1,
+		\end{equation*}
+		kjer smo upoštevali, da je $\int_\Omega p dx = 1$ po definiciji gostote verjetnosti.
+		\item $0 < \alpha < 1$: ker je prvi faktor v neenakosti \ref{neenakost} negativen za $0 < \alpha < 1$, je ekvivalentno dokazati, da
+		\begin{equation*}
+			\log \int_\Omega p^\alpha q^{1-\alpha}  dx \leq 0
+		\end{equation*}
+		oziroma
+		\begin{equation*}
+			0 < \int_\Omega p^\alpha q^{1-\alpha}  dx \leq 1
+		\end{equation*}
+		oziroma
+		\begin{equation*}
+			0 <\int_\Omega \Big(\frac{q}{p}\Big)^{1-\alpha} p \  dx \leq 1.
+		\end{equation*}
+		Uporabimo Jensenovo neenakost za konkavno funkcijo $\phi$:
+		\begin{equation*}
+			\phi(\int f(x) dx) \geq \int (\phi \circ f) (x) dx,
+		\end{equation*}
+		kjer izberemo funkcijo $\phi(t) = t^{1-\alpha}$:
+		\begin{equation*}
+			\int_\Omega \Big(\frac{q}{p}\Big)^{1-\alpha} p \  dx \leq \Big(\int_\Omega \frac{q}{p} p \ dx\Big)^{1-\alpha} = \int_\Omega q \ dx = 1,
+		\end{equation*}
+		kjer smo upoštevali, je $\int_\Omega q dx = 1$ po definiciji gostote verjetnosti.
+	\end{itemize}
+	Dokažimo še drugo točko, torej
+	\begin{equation}\label{eq-ekvivalenca-renyi}
+		\frac{1}{\alpha - 1}\log \int_\Omega p^\alpha q^{1-\alpha} \  dx = 0 \Leftrightarrow p = q.
+	\end{equation}
+	Najprej dokažimo implikacijo iz desne proti levi ($\Leftarrow$):
+	\begin{equation*}
+		\frac{1}{\alpha - 1}\log\int_\Omega \Big(\frac{p}{p}\Big)^\alpha p \  dx = \frac{1}{\alpha - 1}\log\int_\Omega p \  dx = \frac{1}{\alpha - 1}\log 1 = 0.
+	\end{equation*}
+	V drugo smer ($\Rightarrow$) naredimo kratek premislek. Izraz na levi strani ekvivalence \eqref{eq-ekvivalenca-renyi} bo enak $0$, ko:
+	\begin{enumerate}
+		\item $\alpha = 0$, kar je v protislovju s predpostavko, da je $\alpha > 0$,
+		\item $p = q$, saj bo takrat \ \  $\log\int_\Omega p \ dx = \log 1 = 0$.
+	\end{enumerate}
+	Zadnja implikacija je dokazana površno, saj bi se lahko zgodilo tudi, da implikacija ($\Rightarrow$) iz 2. točke velja, če $p \neq q$. Zaključimo, da se to zaradi lastnosti gostot verjetnosti ne more zgoditi.
+\end{proof}
+
+Renyi divergenca ni definirana v $\alpha = 1$, a v tej točki poznamo njeno vrednost:
+
+\begin{izrek}\label{div_v_1}
+	Naj bo $D_\alpha(P \| Q)$ Renyi divergenca porazdelitev $P$ in $Q$. Tedaj velja:
+	\begin{equation}
+		\lim_{\alpha \rightarrow 1} D_\alpha(P \| Q) = \int_\Omega p(x) \cdot \log\Big(\frac{p(x)}{q(x)}\Big) \  dx,
+	\end{equation}
+	kjer je izraz na desni ravno \textbf{Kullback-Leiblerjeva} divergenca porazdelitev $P$ in $Q$, tj.
+	\begin{equation}
+		\lim_{\alpha \rightarrow 1} D_\alpha(P \| Q) = D_{KL} (P \| Q).
+	\end{equation}
+\end{izrek}
+
+Dokažimo izrek \ref{div_v_1}:
+
+\begin{proof}
+	Izračunajmo limito $D_\alpha(P \| Q)$, ko gre $\alpha$ proti $1$.
+	\begin{equation*}
+		\lim_{\alpha \rightarrow 1} \frac{\log \int p(x)^{\alpha}q(x)^{1-\alpha}\  dx}{\alpha-1} = \mathquotes{\frac{0}{0}},
+	\end{equation*}
+	zato lahko uporabimo L'Hospitalovo pravilo:
+	\begin{equation*}
+		\lim_{x \rightarrow a} \frac{f(x)}{g(x)} = \lim_{x \rightarrow a} \frac{f'(x)}{g'(x)}.
+	\end{equation*}
+	Posebej izračunajmo odvoda števca in imenovalca. Odvod imenovalca je trivialen: $(\alpha - 1)' = 1$. Odvajajmo še števec:
+	\begin{align*}
+		&\frac{d}{d\alpha}\Big( \log \int_\Omega p(x)^{\alpha}q(x)^{1-\alpha}\  dx\Big) = \frac{1}{\int_\Omega p(x)^{\alpha}q(x)^{1-\alpha}\  dx} \quad  \frac{d}{d\alpha}\int_\Omega p(x)^{\alpha}q(x)^{1-\alpha}\  dx \overset{(\ast)}{=} \\ &\overset{(\ast)}{=} \frac{1}{\int_\Omega p(x)^{\alpha}q(x)^{1-\alpha}\  dx} \quad \int_\Omega \frac{\partial}{\partial\alpha}\Big(p(x)^{\alpha}q(x)^{1-\alpha}\  dx\Big) = \\ &= \frac{1}{\int_\Omega p(x)^{\alpha}q(x)^{1-\alpha}\  dx} \quad \int_\Omega \Big(p(x)^\alpha \cdot \log p(x) \cdot q(x)^{1 - \alpha} - p(x)^\alpha \cdot q(x)^{1 - \alpha} \cdot \log q(x)\Big)dx = \\ &= \frac{1}{\int_\Omega p(x)^{\alpha}q(x)^{1-\alpha}\  dx} \quad \int_\Omega p(x)^\alpha \cdot q(x)^{1 - \alpha} \cdot \log \frac{p(x)}{q(x)} \ \  dx,
+	\end{align*}
+	kjer smo pri $(\ast)$ upoštevali, da je $F(\alpha) = p(x)^\alpha \cdot q(x)^{1 - \alpha}$ zvezna funkcija. Če izračunamo limito kvocienta odvodov, dobimo:
+	\begin{equation*}
+		\lim_{\alpha \rightarrow 1} \frac{\int_\Omega p(x)^\alpha \cdot q(x)^{1 - \alpha} \cdot \log \frac{p(x)}{q(x)} \ \  dx}{\int_\Omega p(x)^{\alpha}q(x)^{1-\alpha}\  dx} = \frac{1}{\int_\Omega p(x)\  dx} \ \int_\Omega p(x) \cdot \log \frac{p(x)}{q(x)} \ \  dx.
+	\end{equation*}
+	Če upoštevamo, da $\int_\Omega p(x) \ \ dx = 1$, dobimo:
+	\begin{equation*}
+		\int_\Omega p(x) \cdot \log \frac{p(x)}{q(x)} \ \  dx
+	\end{equation*}
+	kar je po definiciji ravno Kullback-Leiblerjeva divergenca.
+\end{proof}
+

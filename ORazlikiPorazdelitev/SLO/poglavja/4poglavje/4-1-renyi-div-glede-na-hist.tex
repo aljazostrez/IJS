@@ -1,0 +1,45 @@
+\section{Renyi divergenca glede na histogram}\label{posplositev1d}
+
+Zdaj, ko dobro poznamo pojem histograma, lahko definiramo Renyi divergenco glede na histogram. Histogram bo torej ocena za gostoto verjetnosti vzorca.
+
+V prejšnjem poglavju smo omenili, da lahko histogram predstavimo kot funkcijo, a bo za računanje Renyi divergence boljše, da si histogram predstavljamo grafično. Torej predstavljamo si ga kot skupek pravokotnikov (stolpcev) z določenimi mejami in višinami.
+
+\subsection{Formula za računanje Renyi divergence glede na histogram}
+
+\begin{izrek}
+    Naj bo $H_1$ histogram, ki ima meje stolpcev $(x_0,x_1,\ldots,x_{n-1}, x_n)$ in višine stolpcev $(h_{(1,0)},\ldots,h_{(1,n-1)})$. Naj bo $H_2$ histogram, ki ima meje stolpcev iste kot $H_1$ in višine stolpcev $(h_{(2,0)}, \ldots, h_{(2,n-1)})$ (torej imata $H_1$ in $H_2$ isto število stolpcev in enake meje, le različne višine). Tedaj lahko Renyi divergenco med histogramoma $H_1$ in $H_2$ izračunamo kot:
+    \begin{equation}
+        D_\alpha (H_1 \| H_2) = \frac{1}{\alpha-1} \log\Big(\sum_{i=0}^{n-1} h_{(1,i)}^\alpha \cdot h_{(2,i)}^{1-\alpha} \cdot (x_{i+1}-x_i)\Big),
+    \end{equation}
+    če $\alpha \neq 1$, oziroma
+    \begin{equation}
+        D_1 (H_1 \| H_2) = \sum_{i=0}^{n-1} h_{(1,i)}\cdot \log \frac{h_{(1,i)}}{h_{(2,i)}} \cdot (x_{i+1}-x_i).
+    \end{equation}
+\end{izrek}
+
+\begin{proof}
+    Vemo: če $H_1$ in $H_2$ zapišemo kot funkciji ($H_1 = H_1 (x)$ in $H_2 = H_2(x)$), dobljeni funkciji ustrezata pogojem za gostoto verjetnosti. Torej lahko izračunamo Renyi divergenco po definiciji:
+    \begin{equation}
+        D_{\alpha} (H_1 \| H_2) = \frac{1}{\alpha-1} \log\int_{x_0}^{x_n} H_1(x)^\alpha \cdot H_2(x)^{1-\alpha} dx.
+    \end{equation}
+    Ker sta funkciji $H_1$ in $H_2$ nezvezni v istih točkah (v mejah stolpcev), zapišemo integral kot vsoto integralov na intervalih, kjer sta $H_1$ in $H_2$ konstantni:
+    \begin{equation}
+        \int_{x_0}^{x_n} H_1(x)^\alpha \cdot H_2(x)^{1-\alpha} dx = \int_{x_0}^{x_1} H_1(x)^\alpha \cdot H_2(x)^{1-\alpha} dx + \ldots + \int_{x_{n-1}}^{x_n} H_1(x)^\alpha \cdot H_2(x)^{1-\alpha} dx.
+    \end{equation}
+    Če upoštevamo še konstantne vrednosti funkcij $H_1$ in $H_2$ na intervalih integriranja, in v vsakem členu integriramo $\int_a^b dx = b-a$, dobimo:
+    \begin{equation}
+        h_{(1,0)}^\alpha\cdot h_{(2,0)}^{1-\alpha}\cdot (x_1-x_0) + \ldots + h_{(1,n-1)}^\alpha\cdot h_{(2,n-1)}^{1-\alpha}\cdot (x_n-x_{n-1}) = \sum_{i=0}^{n-1} h_{(1,i)}^\alpha \cdot h_{(2,i)}^{1-\alpha} \cdot (x_{i+1}-x_i),
+    \end{equation}
+    torej je:
+    \begin{equation}
+        D_\alpha (H_1 \| H_2) = \frac{1}{\alpha-1} \log\Big(\sum_{i=0}^{n-1} h_{(1,i)}^\alpha \cdot h_{(2,i)}^{1-\alpha} \cdot (x_{i+1}-x_i)\Big).
+    \end{equation}
+    Podobno dokažemo za $\alpha = 1$ - izračunamo Kullback-Leibler divergenco.
+\end{proof}
+
+Zdaj znamo izračunati Renyi divergenco med dvema histogramoma, a imamo zelo strogo omejitev: meje stolpcev prvega histograma morajo biti enake mejam stolpcev drugega histograma. Opišimo, kako v splošnem primeru zadostimo tej omejitvi, brez da spreminjamo ploščine histogramov.
+
+% rezanje histogramov
+\input{poglavja/4poglavje/4-2-sprostitev-definicijskega-obmocja.tex}
+\pagebreak
+\input{poglavja/4poglavje/4-3-rezanje-stolpcev.tex}

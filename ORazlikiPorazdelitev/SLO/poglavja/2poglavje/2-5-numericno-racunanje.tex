@@ -1,0 +1,91 @@
+\subsection{Numerično računanje Renyi divergence}
+
+Kljub temu, da v definiciji divergence zahtevamo, da imata porazdelitvi ista nosilca oz. sta na istih območjih neničelni, se to v praksi pogostokrat ne obnese.
+
+Prva težava je, da bi mogoče hoteli primerjati tudi porazdelitve, ki nimajo istih nosilcev. Vsako porazdelitev lahko razširimo na $\RR$ tako, da ji povsod, kjer ta ni definirana, priredimo vrednost 0. S tem sicer dobimo porazdelitvi z istim difinicijskim območjem, a nimata istih nosilcev. Seveda pa se poraja vprašanje, ali je sploh smiselno primerjati porazelitvi z različnima nosilcema? Na primer, ali je smiselno primerjati uniformno porazdelitev na intervalu $[0, 1]$ z uniformno porazdelitvijo na intervalu $[2, 3]$? Bralec naj to presodi sam.
+
+Drugo težavo malce bolj analizirajmo, saj se pojavi tudi, ko imata porazdelitvi ista nosilca. Kot primer vzemimo normalni porazdelitvi. Gostota verjetnosti normalne porazdelitve je funkcija $\RR \rightarrow \RR^+$, torej bi morali pri Renyi divergenci dveh normalnih porazdelitev vedno dobiti rezultat v množici realnih števil.
+
+Naj bosta $p$ in $q$ gostoti verjetnosti poljubnih realnih funkcij. Problem nastane v repih normalnih porazdelitev. Kljub temu, da je $p(x) > 0$ in $q(x) > 0$ za vsak $x \in \RR$, pride do numeričnih težav (deljenje z ničlo). Zakaj? Pride do podkoračitve (v neki točki nam računalnik zaokroži vrednost $p(x)$ na 0). Vpeljimo pojem konstante numerične ločljivosti.
+
+\begin{definicija}
+    \textbf{Konstanta numerične ločljivosti} je najmanjše pozitivno število, ki ga operacijski sistem še ne zaokroži na 0 (t.j. v operacijskem sistemu najmanjše predstavljivo število).
+\end{definicija}
+
+\begin{zgled}
+    V 64-bitnem operacijskem sistemu je konstanta numerične ločljivosti enaka \\$\epsilon = 2,220446049250313 \cdot 10^{-16}$. Torej bodo vsa števila med 0 in $\epsilon$ zaokrožena na 0.
+\end{zgled}
+
+Predpostavimo, da operiramo s 64-bitni sistemom. Naj bo od zdaj naprej \begin{equation*}
+    \epsilon = 2,220446049250313 \cdot 10^{-16}.
+\end{equation*}
+
+Torej, normalna porazdelitev $p$ bo neničelna le na intervalu $[x_1, x_2]$, kjer sta $x_1$ in $x_2$ rešitvi enačbe $p(x) = \epsilon$, za število $a$ na komplementu tega intervala pa bo $p(a)=0$. Analogno sklepamo za normalno porazdelitev $q$.
+
+Zaradi takšnega zaokroževanja pride pri izračunu Renyi divergence do deljenja s številom 0. Spomnimo se formule za izračun Renyi divergence:
+\begin{equation}
+D_\alpha(p \| q) =
+\begin{cases}
+    \frac{1}{\alpha-1} \log \int_{\Omega} p(x)^{\alpha}q(x)^{1-\alpha}  dx&, \quad \alpha \neq 1 \\
+    \quad \int_{\Omega} p(x) \log \frac{p(x)}{q(x)} dx&, \quad \alpha = 1
+\end{cases}
+\end{equation}
+Najprej obravnavajmo težave pri $\alpha \neq 1$. Pride do deljenja z ničlo, ko je $q(x) = 0$ za nek $x$, ker je 
+\begin{equation}
+    q(x)^{1-\alpha} = q(x)\cdot\Big(\frac{1}{q(x)}\Big)^\alpha.
+\end{equation}
+Temu problemu se izognemo tako, da definiramo:
+\begin{itemize}
+    \item $\frac{0}{0}=0$,
+	\item $\frac{a}{0}=\infty$ \ za $a>0$,
+	\item $\log\infty = \infty$.
+\end{itemize}
+Če se torej zgodi, da so obe gostoti hkrati 0, ni težav. Ampak v trenutku, ko je $q(x) = 0$ in $p(x) \neq 0$, bo $D_\alpha(p \| q) = \infty$.
+
+Prav tako se deljenje z 0 pojavi pri $\alpha = 1$. Poleg zgoraj definiranih pravil, s katerimi se izognemo težavam, definirajmo še:
+\begin{itemize}
+    \item $\log 0 = -\infty$.
+\end{itemize}
+
+Opazimo, da lahko kar hitro pridemo do rezultata $\infty$ oz. $-\infty$. Poglejmo, kaj bi lahko storili, da bi vedno dobili rezultat na intervalu $(-\infty, \infty)$. Moramo pa paziti, saj s tem postopkom nekoliko posegamo v same gostote verjetnosti in na koncu za gostoto verjetnosti $p$ ne bo več veljalo $\int_\Omega p(x) dx = 1$. Če pa bo to posegaje minimalno, kar je odvisno od primera do primera, pa lahko na pravilen način pridemo do rezultata na željenem intervalu $(-\infty, \infty)$.
+
+\begin{opomba}
+    \textbf{(dogovor)} Število $a$ je numerično enako $0$ oziroma numerično ničelno, če je enako $0$ ali če je $|a| < \epsilon$ (tedaj pride do podkoračitve).
+\end{opomba}
+
+Vzemimo poljubni gostoti verjetnosti $p, q$ in ju razširimo na $\RR$. Naj bo $m$ tako število, da velja:
+\begin{equation*}
+    \forall x_0 < m, \forall \delta > 0:
+    \Big(p(x_0) < \epsilon \ \  \wedge \ \  q(x_0) < \epsilon\Big)
+    \wedge
+    \Big(p(m + \delta) \geq \epsilon \ \  \vee \ \  q(m + \delta) \geq \epsilon\Big),
+\end{equation*}
+t.j. $m$ je tako število, da sta gostoti verjetnosti numerično ničelni na intervalu $(-\infty, m)$ (zaradi podkoračitve) in $m$ je največje tako število. Vemo, da tako število obstaja, saj je $\lim_{x \rightarrow -\infty} p(x) = 0$ za poljubno gostoto verjetnosti $p$ (ploščina med $p$ in $x$-osjo je $1$). Naj bo $M$ tako število, da velja:
+\begin{equation*}
+    \forall x_0 > M, \forall \delta > 0:
+    \Big(p(x_0) < \epsilon \ \  \wedge \ \  q(x_0) < \epsilon\Big)
+    \wedge
+    \Big(p(M - \delta) \geq \epsilon \ \  \vee \ \  q(M - \delta) \geq \epsilon\Big),
+\end{equation*}
+t.j. $M$ je tako število, da sta gostoti verjetnosti numerično ničelni na intervalu $(M, \infty)$ (zaradi podkoračitve) in $M$ je najmanjše tako število. Vemo, da tako število obstaja, saj je $\lim_{x \rightarrow \infty} p(x) = 0$ za poljubno gostoto verjetnosti $p$.
+
+Na komplementu intervala $[m, M]$ bodo zaradi numerične ločljivosti obe gostoti enaki 0. Na intervalu $[m, M]$ pa definirajmo novi funkciji:
+\[
+f(x) := 
+\begin{cases}
+    p(x) &, \  p(x) > \epsilon \\
+    \quad \epsilon &, \  p(x) \leq \epsilon
+\end{cases}
+\quad \quad \text{in} \quad \quad
+g(x) := 
+\begin{cases}
+    q(x) &, \  q(x) > \epsilon \\
+    \quad \epsilon &, \  q(x) \leq \epsilon
+\end{cases}
+\quad .
+\]
+Funciji $f$ in $g$ se od $p$ in $q$ razlikujeta le tam, kjer sta $p$ in $q$ zaradi podkoračitve enaka 0. Preveriti moramo le še, da je $\int_{[m,M]} f(x) dx \approx 1$ in $\int_{[m,M]} g(x) dx \approx 1$. To bo res, če bo skupna dolžina podintervalov na $[m, M]$, kjer sta $p, q < \epsilon$, majhna. Sedaj lahko naredimo aroksimacijo: $D_\alpha(p \| q) \approx D_\alpha(f \| g)$, kjer zagotovo ne pride do deljenja z 0. Kljub temu pa bodo te vrednosti zaradi deljenja z $\epsilon$ lahko zelo velike.
+
+\begin{opomba}
+    Kdaj lahko $\int_{[m,M]} f(x) dx$ zaokrožimo na 1, je odvisno od tega, kakšna napaka je za nas še zadovoljiva. Na primer, če je skupna dolžina podintervalov na $[m,M]$, kjer je $p(x) < \epsilon$, enaka 1000, se bo vrednost $\int_{[m,M]} f(x) dx$ absolutno razlikovala od 1 za približno $2,22 \cdot 10^{-13}$.
+\end{opomba}

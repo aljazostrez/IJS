@@ -1,0 +1,23 @@
+\subsection{Definicija divergence}
+
+Najprej navedimo motivacijski zgled za uporabo divergence.
+
+\begin{zgled}
+	V podjetju s proizvodnjo na tekočem traku nas zadolžijo za oskrbo tekočega traku. Naša naloga je, da sporočimo napako, ko jo zaznamo. Napake lahko zaznamo z odstopanjem izhodnih podatkov (npr. temperatura, vibracije, glasnost, itd.).
+
+	Nastane problem: kako sploh primerjati trenutne podatke z optimalnimi in kdaj je odstopanje podatkov dovolj veliko? Potrebujemo metodo, s pomočjo katere bomo lahko primerjali razliko med dvema množicama podatkov. Poleg tega moramo z zagotovostjo trditi, da je prišlo do napake. Pomagamo si z divergenco.
+\end{zgled}
+
+Divergenca je torej merilo za razliko med dvema statističnima vzorcema (vzorca si lahko predstavljamo kot dve porazdelitvi). Navedimo formalno definicijo.
+
+\begin{definicija}
+	Naj bo $S$ prostor vseh verjetnostnih porazdelitev na istem definicijskem območju (tj. porazdelitve z istimi nosilci - na istem območju niso enake 0). \textbf{Divergenca} na $S$ je funkcija $D(\cdot \| \cdot): S \times S \rightarrow \mathbb{R}$, tako da velja:
+	\begin{enumerate}
+		\item $D(p \| q) \geq 0$ za vsaka $p, q \in S$,
+		\item $D(p \| q) = 0 \Leftrightarrow p = q$.
+	\end{enumerate}
+	\textbf{Dualna divergenca} $D^\ast$ je definirana kot $D^\ast(p \| q) = D(q \| p)$.
+\end{definicija}
+
+Divergenca ni nujno simetrična in zanjo ne velja trikotniška neenakost, zato ne moremo enačiti pojmov divergenca in metrika.
+

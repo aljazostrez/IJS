@@ -1,0 +1,51 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Python 3",
+            "type": "shell",
+            "command": "bpython",
+            "args": [
+                "-i",
+                {
+                    "value": "${file}",
+                    "quoting": "escape"
+                }
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "OCaml",
+            "type": "shell",
+            "command": "ocaml",
+            "args": [
+                "-init",
+                {
+                    "value": "${file}",
+                    "quoting": "escape"
+                }
+            ],
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": true
+            // },
+            "problemMatcher": []
+        },
+        {
+            "label": "C",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                {
+                    "value": "${file}",
+                    "quoting": "escape"
+                },
+                "&&",
+                "./a.out"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

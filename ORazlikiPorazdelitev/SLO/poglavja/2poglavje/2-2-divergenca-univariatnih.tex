@@ -1,0 +1,32 @@
+\subsection{Divergenca univariatnih porazdelitev}
+
+Definiranih je več različnih divergenc. Vsaka divegenca ima neke koristne lastnosti (npr. ena divergenca je bolj občutljiva glede na srednje vrednosti porazdelitev, tj. bo velika, ko se bodo srednje vrednosti razlikovale; spet druga divergenca je bolj občutljiva na varianco porazdelitev).
+
+Renyi divergenci se bomo posvetili v naslednjem poglavju. Brez dokazov, da je to res divergenca, navedimo še nekaj ostalih primerov divergenc. Navedimo samo formule za zvezne spremenljivke, saj je formula za diskretne spremenljivke analogna (namesto integrala uporabimo vsoto).
+
+\begin{zgled}
+	\leavevmode
+	\begin{enumerate}
+		\item \textbf{Kullback-Leiblerjeva divergenca}:
+		\begin{equation}
+			D_{KL}(p \| q) = \int_\Omega p(x) \cdot \log\Big(\frac{p(x)}{q(x)}\Big) \  dx,
+		\end{equation}
+		kjer sta $p$ in $q$ porazdelitvi z definicijskim območjem $\Omega$.
+		\item \textbf{f-divergenca}:
+		To je družina divergenc, generirana s funkcijami $f$, za katere velja:
+		\begin{itemize}
+			\item $f$ konveksna na $\mathbb{R}^+$,
+			\item $f(1) = 0$.
+		\end{itemize}
+		Elementi te družine so oblike:
+		\begin{equation}
+			D_f(p \| q) = \int_\Omega p(x) \cdot f\Big(\frac{p(x)}{q(x)}\Big) \  dx,
+		\end{equation}
+		kjer sta $p$ in $q$ porazdelitvi definirani na definicijskem območju $\Omega$.
+		\item \textbf{Hellingerjeva distanca}:
+		\begin{equation}
+			H^2(p, q) = 2 \int_\Omega \Big(\sqrt{p(x)} - \sqrt{q(x)}\Big)^2 \  dx,
+		\end{equation}
+		kjer sta $p$ in $q$ porazdelitvi definirani na definicijskem območju $\Omega$.
+	\end{enumerate}
+\end{zgled}

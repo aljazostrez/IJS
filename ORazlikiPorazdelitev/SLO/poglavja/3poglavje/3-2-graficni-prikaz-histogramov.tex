@@ -1,0 +1,16 @@
+\subsection{Grafični prikaz histogramov}
+
+Histogram je odsekoma konstantna funkcija, kar je razvidno iz definicije ($h(x)$ je konstantna na vsakem intervalu $[a_i, a_{i+1})$). Zato si histogram lahko predstavljamo kot množico pravokotnikov, ki jim pravimo \textbf{stolpci} (angl. bins) histograma.
+
+Naj bo na intervalu $[a_{i}, a_{i+1}), i \in \{0,\ldots,n-1\}$ i-ti stolpec oziroma stolpec i histograma, torej ima histogram $n$ stolpcev. Stolpec i ima širino $w_i = a_{i+1} - a_{i}$. Če so intervali enako dolgi, imajo vsi stolpci isto širino $w$. To širino lahko tudi izračunamo:
+\begin{equation}\label{sirina_stevilo}
+    w = \frac{\max(S)-min(S)}{n} = \frac{a_n - a_0}{n},
+\end{equation}
+kjer je n število stolpcev histograma.
+
+Višina i-tega stolpca $h_i$ pa je vrednost funkcije $h$ v poljubni točki znotraj intervala \\ $[a_{i}, a_{i+1})$, torej:
+\begin{equation}
+    h_i = h(x) \quad \text{za} \quad \forall  x \in [a_{i}, a_{i+1}].
+\end{equation}
+
+Zgornji način predstavitve histograma ni uporaben le grafično, temveč tudi računsko. Namesto integrala funkcije $h$ lahko izračunamo vsoto ploščin stolpcev, da dokažemo, da je ploščina histograma enaka 1. Numerično se nam bo to izplačalo, saj je numerično integriranje bolj zahtevno kot računanje osnovnih operacij. Enako velja za izračun divergence, kjer uporabimo integracijo.
